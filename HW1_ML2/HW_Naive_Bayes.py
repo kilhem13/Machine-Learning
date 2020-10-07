@@ -36,7 +36,7 @@ def extract_features(filename, dictionnaire):
 
 
 def get_label(filename):
-    with open(os.path.join(os.getcwd() + "/Data", "traning_data.txt"), 'r') as f:
+    with open(os.path.join(os.getcwd() + "/Data", "training_data.txt"), 'r') as f:
         lines = f.readlines()
         sorted_labels = sorted((line.split("\n")[0].split("\t")[0]) for line in lines)
         f.seek(0)
@@ -95,10 +95,10 @@ def naive_bayes(train_label, last_ham_index, email, spam_count, dictionnaire):
     return Pspam_w_email, Pword * Pham
 
 
-dictionnaire = parsing_data("traning_data.txt")
-features_matrix = extract_features("traning_data.txt", dictionnaire)
-train_label, last_ham_index = get_label("traning_data.txt")
-spam_count, norm_count = get_count("traning_data.txt", last_ham_index)
+dictionnaire = parsing_data("training_data.txt")
+features_matrix = extract_features("training_data.txt", dictionnaire)
+train_label, last_ham_index = get_label("training_data.txt")
+spam_count, norm_count = get_count("training_data.txt", last_ham_index)
 email = "FREE for 1st week! No1 Nokia tone 4 ur mob every week just txt NOKIA to 8007 Get txting and tell ur mates www.getzed.co.uk POBox 36504 W45WQ norm150p/tone 16+"
 Pspam, Pham = naive_bayes(train_label, last_ham_index, email, spam_count, norm_count)
 
@@ -107,7 +107,7 @@ faux_pos = 0
 faux_neg = 0
 vrai_pos = 0
 vrai_neg = 0
-with open(os.path.join(os.getcwd() + "/Data", "traning_data.txt"), 'r') as f:
+with open(os.path.join(os.getcwd() + "/Data", "training_data.txt"), 'r') as f:
     lines = f.readlines()
     sorted_messages = sorted((line.split("\t")) for line in lines)
     f.seek(0)
