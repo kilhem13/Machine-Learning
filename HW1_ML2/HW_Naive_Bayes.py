@@ -107,7 +107,7 @@ faux_pos = 0
 faux_neg = 0
 vrai_pos = 0
 vrai_neg = 0
-with open(os.path.join(os.getcwd() + "/Data", "training_data.txt"), 'r') as f:
+with open(os.path.join(os.getcwd() + "/Data", "test_data.txt"), 'r') as f:
     lines = f.readlines()
     sorted_messages = sorted((line.split("\t")) for line in lines)
     f.seek(0)
@@ -125,7 +125,6 @@ with open(os.path.join(os.getcwd() + "/Data", "training_data.txt"), 'r') as f:
         else:
             faux_neg = faux_neg +1
         index = index + 1
-    print(test_result)
 print("Vrai Positifs: ", vrai_pos, "\nFaux Positifs: ", faux_pos, "\nVrai Negatifs: ", vrai_neg, "\nFaux Negatifs: ", faux_neg)
 
 
