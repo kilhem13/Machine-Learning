@@ -84,11 +84,17 @@ def naive_bayes(train_label, last_ham_index, email, spam_count, dictionnaire):
     Pham = 1-Pspam
     Pword = 1.
     Pword_w_spam = 1.
+    nbr_spam_word = 0
+    nbr_ham_word = 0
+    for word in spam_count:
+        nbr_spam_word += word[1]
+    for word in dictionnaire:
+        nbr_ham_word += word[1]
+
     for word in words:
         if dict(dictionnaire).get(word) or dict(spam_count).get(word):
-
-            nbr_spam = (dict(spam_count).get(word)+1 if dict(spam_count).get(word) else 1)/ len(spam_count)
-            nbr_norm = (dict(dictionnaire).get(word)+1 if dict(dictionnaire).get(word) else 1)/len(dictionnaire)
+            nbr_spam = (dict(spam_count).get(word)+1 if dict(spam_count).get(word) else 1)/nbr_spam_word
+            nbr_norm = (dict(dictionnaire).get(word)+1 if dict(dictionnaire).get(word) else 1)/nbr_ham_word
             Pword = Pword * nbr_norm
             Pword_w_spam = Pword_w_spam * nbr_spam
     Pspam_w_email = Pspam * Pword_w_spam
@@ -125,7 +131,7 @@ with open(os.path.join(os.getcwd() + "/Data", "test_data.txt"), 'r') as f:
         else:
             faux_neg = faux_neg +1
         index = index + 1
-print("Vrai Positifs: ", vrai_pos, "\nFaux Positifs: ", faux_pos, "\nVrai Negatifs: ", vrai_neg, "\nFaux Negatifs: ", faux_neg)
+print("Vrais Positifs: ", vrai_pos, "\nFaux Positifs: ", faux_pos, "\nVrais Negatifs: ", vrai_neg, "\nFaux Negatifs: ", faux_neg)
 
 
 
