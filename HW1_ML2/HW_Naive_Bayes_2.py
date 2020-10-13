@@ -7,7 +7,7 @@ from collections import Counter
 
 df = pd.read_csv("Data/Data.txt", sep="\t")
 df.columns = ["status", "body"]
-data_train, data_test = train_test_split(df, test_size=0.40, random_state=16)
+data_train, data_test = train_test_split(df, test_size=0.20, random_state=16)
 
 spam_messages = df.loc[df["status"] == 'spam']
 ham_messages = df.loc[df["status"] == 'ham']
@@ -30,8 +30,8 @@ def naive_bayes(email, spam_dict, ham_dict, nbr_spam_word, nbr_ham_word):
 
     for word in words:
         if word in ham_dict.index or word in spam_dict.index:
-            nbr_spam = (spam_dict._get_value(word, 'count')+1 if word in spam_dict.index else 1)/nbr_spam_word
-            nbr_norm = (ham_dict._get_value(word, 'count')+1 if word in ham_dict.index else 1)/nbr_ham_word
+            nbr_spam = (spam_dict._get_value(word, 'count')+1 if word in spam_dict.index else 1)/(nbr_spam_word+1)
+            nbr_norm = (ham_dict._get_value(word, 'count')+1 if word in ham_dict.index else 1)/(nbr_ham_word+1)
             Pword = Pword * nbr_norm
             Pword_w_spam = Pword_w_spam * nbr_spam
     Pspam_w_email = Pspam * Pword_w_spam
